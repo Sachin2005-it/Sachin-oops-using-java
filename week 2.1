@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class PatternGenerator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt(); 
+        List<Integer> result = generatePattern(n);
+        printPattern(result);
+
+        scanner.close();
+    }
+
+    public static List<Integer> generatePattern(int n) {
+        if (n == 1) {
+            List<Integer> baseCase = new ArrayList<>();
+            baseCase.add(1);
+            return baseCase;
+        }
+        List<Integer> previousPattern = generatePattern(n - 1);
+        List<Integer> currentPattern = new ArrayList<>(previousPattern);
+        currentPattern.add(n); 
+        currentPattern.addAll(previousPattern); 
+
+        return currentPattern;
+    }
+
+    public static void printPattern(List<Integer> pattern) {
+        for (int i = 0; i < pattern.size(); i++) {
+            System.out.print(pattern.get(i));
+            if (i < pattern.size() - 1) {
+                System.out.print(" "); 
+            }
+        }
+        System.out.println(); 
+    }
+}
